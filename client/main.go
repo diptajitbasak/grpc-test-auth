@@ -19,12 +19,10 @@ func main() {
 
 	g := gin.Default()
 
-	g.GET("/verifyToken/:token/:machineId", func(ctx *gin.Context) {
-		machineId := ctx.Param("machineId")
+	g.GET("/verifyToken/:token", func(ctx *gin.Context) {
 		Token := ctx.Param("token")
-		fmt.Println(machineId)
 		fmt.Println(Token)
-		req := &protos.VerifyRequest{MachineId: machineId, Token: Token}
+		req := &protos.VerifyRequest{Token: Token}
 		if response, err := client.VerifyToken(ctx, req); err == nil {
 			ctx.JSON(http.StatusOK, gin.H{
 				"Response": response.Msg,

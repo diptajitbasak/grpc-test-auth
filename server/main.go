@@ -16,7 +16,7 @@ import (
 type server struct {}
 var jwtKey = []byte("qwerty")
 type Claims struct {
-	Id string `json:"id"`
+	Id string `json:"Id"`
 	jwt.StandardClaims
 }
 
@@ -71,19 +71,31 @@ func (s *server) GenToken (ctx context.Context, request *protos.Request) (*proto
 }
 
 func (s *server) VerifyToken (ctx context.Context, request *protos.VerifyRequest) (*protos.VerifyResponse, error) {
-	machineID := request.GetMachineId()
-	Token := request.GetToken()
-	resp := CheckFromDB(Token, machineID);
-	fmt.Println("server response", resp)
 	var msg string;
 	var err error;
-	if resp {
-		msg = "Verified!!!"
+	Token := request.GetToken()
+	tokenString, err := jwt.Parse(Token, func(token *jwt.Token) (interface{}, error) {
+    // Don't forget to validate the alg is what you expect:
+    if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+      return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		} else {
+			return jwtKey, nil
+		}
+	})
+	if claims, ok := tokenString.Claims.(jwt.MapClaims); ok && tokenString.Valid {
+		machineID := claims["Id"].(string)
+		resp := CheckFromDB(Token, machineID);
+		fmt.Println("server response", resp)
+		if resp {
+			msg = "Verified!!!"
+		} else {
+			msg = "Token Invalid!!!"
+			err = errors.New("Invalid Machine id")
+		}
 	} else {
 		msg = "Token Invalid!!!"
-		err = errors.New("Invalid Token")
+    err = errors.New("Invalid JWT Token")
 	}
-	fmt.Println(msg)
 	return &protos.VerifyResponse{ Msg: msg }, err
 }
 
