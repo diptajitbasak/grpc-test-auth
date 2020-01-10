@@ -102,24 +102,115 @@ func (m *Response) GetToken() string {
 	return ""
 }
 
+type VerifyRequest struct {
+	MachineId            string   `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
+	Token                string   `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VerifyRequest) Reset()         { *m = VerifyRequest{} }
+func (m *VerifyRequest) String() string { return proto.CompactTextString(m) }
+func (*VerifyRequest) ProtoMessage()    {}
+func (*VerifyRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f401a58c1fc7ceef, []int{2}
+}
+
+func (m *VerifyRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VerifyRequest.Unmarshal(m, b)
+}
+func (m *VerifyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VerifyRequest.Marshal(b, m, deterministic)
+}
+func (m *VerifyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VerifyRequest.Merge(m, src)
+}
+func (m *VerifyRequest) XXX_Size() int {
+	return xxx_messageInfo_VerifyRequest.Size(m)
+}
+func (m *VerifyRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_VerifyRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VerifyRequest proto.InternalMessageInfo
+
+func (m *VerifyRequest) GetMachineId() string {
+	if m != nil {
+		return m.MachineId
+	}
+	return ""
+}
+
+func (m *VerifyRequest) GetToken() string {
+	if m != nil {
+		return m.Token
+	}
+	return ""
+}
+
+type VerifyResponse struct {
+	Msg                  string   `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VerifyResponse) Reset()         { *m = VerifyResponse{} }
+func (m *VerifyResponse) String() string { return proto.CompactTextString(m) }
+func (*VerifyResponse) ProtoMessage()    {}
+func (*VerifyResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f401a58c1fc7ceef, []int{3}
+}
+
+func (m *VerifyResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VerifyResponse.Unmarshal(m, b)
+}
+func (m *VerifyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VerifyResponse.Marshal(b, m, deterministic)
+}
+func (m *VerifyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VerifyResponse.Merge(m, src)
+}
+func (m *VerifyResponse) XXX_Size() int {
+	return xxx_messageInfo_VerifyResponse.Size(m)
+}
+func (m *VerifyResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_VerifyResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VerifyResponse proto.InternalMessageInfo
+
+func (m *VerifyResponse) GetMsg() string {
+	if m != nil {
+		return m.Msg
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Request)(nil), "protos.Request")
 	proto.RegisterType((*Response)(nil), "protos.Response")
+	proto.RegisterType((*VerifyRequest)(nil), "protos.VerifyRequest")
+	proto.RegisterType((*VerifyResponse)(nil), "protos.VerifyResponse")
 }
 
 func init() { proto.RegisterFile("conn.proto", fileDescriptor_f401a58c1fc7ceef) }
 
 var fileDescriptor_f401a58c1fc7ceef = []byte{
-	// 137 bytes of a gzipped FileDescriptorProto
+	// 191 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0xce, 0xcf, 0xcb,
 	0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x03, 0x53, 0xc5, 0x4a, 0xea, 0x5c, 0xec, 0x41,
 	0xa9, 0x85, 0xa5, 0xa9, 0xc5, 0x25, 0x42, 0x32, 0x5c, 0x9c, 0xb9, 0x89, 0xc9, 0x19, 0x99, 0x79,
 	0xa9, 0x9e, 0x29, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x08, 0x01, 0x25, 0x05, 0x2e, 0x8e,
 	0xa0, 0xd4, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21, 0x11, 0x2e, 0xd6, 0x92, 0xfc, 0xec, 0xd4,
-	0x3c, 0xa8, 0x2a, 0x08, 0xc7, 0xc8, 0x86, 0x8b, 0xdb, 0x3d, 0x35, 0xcf, 0x2b, 0x3c, 0x24, 0x04,
-	0xc4, 0x15, 0xd2, 0xe5, 0xe2, 0x70, 0x4f, 0xcd, 0x83, 0xb0, 0xf9, 0x21, 0xb6, 0x16, 0xeb, 0x41,
-	0xed, 0x92, 0x12, 0x40, 0x08, 0x40, 0xcc, 0x4c, 0x82, 0x38, 0xc8, 0x18, 0x10, 0x00, 0x00, 0xff,
-	0xff, 0x2c, 0x08, 0xf2, 0xbc, 0xa5, 0x00, 0x00, 0x00,
+	0x3c, 0xa8, 0x2a, 0x08, 0x47, 0xc9, 0x99, 0x8b, 0x37, 0x2c, 0xb5, 0x28, 0x33, 0xad, 0x92, 0x28,
+	0x03, 0x11, 0x86, 0x30, 0x21, 0x1b, 0xa2, 0xc4, 0xc5, 0x07, 0x33, 0x04, 0x6a, 0x99, 0x00, 0x17,
+	0x73, 0x6e, 0x71, 0x3a, 0x54, 0x3f, 0x88, 0x69, 0x54, 0xc5, 0xc5, 0xed, 0x9e, 0x9a, 0xe7, 0x15,
+	0x1e, 0x12, 0x02, 0xd2, 0x22, 0xa4, 0xcb, 0xc5, 0xe1, 0x9e, 0x9a, 0x07, 0x61, 0xf3, 0x43, 0xbc,
+	0x57, 0xac, 0x07, 0x75, 0x83, 0x94, 0x00, 0x42, 0x00, 0x6a, 0x9e, 0x0d, 0x17, 0x37, 0xc4, 0x06,
+	0x88, 0x0e, 0x51, 0x98, 0x02, 0x14, 0xb7, 0x4b, 0x89, 0xa1, 0x0b, 0x43, 0x74, 0x27, 0x41, 0xc2,
+	0xcd, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xbd, 0x08, 0x72, 0x30, 0x4c, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -135,6 +226,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type GenJWTTokenClient interface {
 	GenToken(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	VerifyToken(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*VerifyResponse, error)
 }
 
 type genJWTTokenClient struct {
@@ -154,9 +246,19 @@ func (c *genJWTTokenClient) GenToken(ctx context.Context, in *Request, opts ...g
 	return out, nil
 }
 
+func (c *genJWTTokenClient) VerifyToken(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*VerifyResponse, error) {
+	out := new(VerifyResponse)
+	err := c.cc.Invoke(ctx, "/protos.GenJWTToken/VerifyToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GenJWTTokenServer is the server API for GenJWTToken service.
 type GenJWTTokenServer interface {
 	GenToken(context.Context, *Request) (*Response, error)
+	VerifyToken(context.Context, *VerifyRequest) (*VerifyResponse, error)
 }
 
 // UnimplementedGenJWTTokenServer can be embedded to have forward compatible implementations.
@@ -165,6 +267,9 @@ type UnimplementedGenJWTTokenServer struct {
 
 func (*UnimplementedGenJWTTokenServer) GenToken(ctx context.Context, req *Request) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenToken not implemented")
+}
+func (*UnimplementedGenJWTTokenServer) VerifyToken(ctx context.Context, req *VerifyRequest) (*VerifyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyToken not implemented")
 }
 
 func RegisterGenJWTTokenServer(s *grpc.Server, srv GenJWTTokenServer) {
@@ -189,6 +294,24 @@ func _GenJWTToken_GenToken_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GenJWTToken_VerifyToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GenJWTTokenServer).VerifyToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.GenJWTToken/VerifyToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GenJWTTokenServer).VerifyToken(ctx, req.(*VerifyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _GenJWTToken_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "protos.GenJWTToken",
 	HandlerType: (*GenJWTTokenServer)(nil),
@@ -196,6 +319,10 @@ var _GenJWTToken_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenToken",
 			Handler:    _GenJWTToken_GenToken_Handler,
+		},
+		{
+			MethodName: "VerifyToken",
+			Handler:    _GenJWTToken_VerifyToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

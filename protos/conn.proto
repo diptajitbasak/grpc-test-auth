@@ -10,6 +10,16 @@ message Response {
   string token = 1;
 }
 
+message VerifyRequest {
+  string machineId = 1;
+  string token =2;
+}
+
+message VerifyResponse {
+  string msg = 1;
+}
+
 service GenJWTToken {
   rpc GenToken(Request) returns (Response);
+  rpc VerifyToken(VerifyRequest) returns (VerifyResponse);
 }

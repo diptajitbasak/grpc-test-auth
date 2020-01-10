@@ -18,6 +18,22 @@ func main() {
 	client := protos.NewGenJWTTokenClient(conn)
 
 	g := gin.Default()
+
+	g.GET("/verifyToken/:token/:machineId", func(ctx *gin.Context) {
+		machineId := ctx.Param("machineId")
+		Token := ctx.Param("token")
+		fmt.Println(machineId)
+		fmt.Println(Token)
+		req := &protos.VerifyRequest{MachineId: machineId, Token: Token}
+		if response, err := client.VerifyToken(ctx, req); err == nil {
+			ctx.JSON(http.StatusOK, gin.H{
+				"Response": response.Msg,
+			})
+		} else {
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		}
+	})
+
 	g.GET("/getToken/:machineId", func(ctx *gin.Context) {
 		machineId := ctx.Param("machineId")
 		// if err!= nil {
